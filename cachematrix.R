@@ -1,31 +1,36 @@
-## Put comments here that give an overall description of what your
-## functions do
+## The two functions are used to get the inverse of a matrix.
+## Since calculations can be time-consuming, we remove the redundancy of
+##  calculating the inverse by caching the result.
 
-## Write a short comment describing this function
-
+## makeCacheMatrix returns a list of functions to set/get the given matrix
+## and to set/get the inverse of the given matrix
 makeCacheMatrix <- function(x = matrix()) {
     inv<-NULL
+    
     set<-function(y){
         x<<-y
         inv<<-NULL
     }
+    
     get<-function(){
         x
-        }
-    #setinv<-function(solve)inv<<-solve
+    }
+    
     setinv<-function(mm){
         inv<<-mm
         inv
     }
+    
     getinv<-function() {
         inv
-        }
+    }
+    
     list(set=set,get=get,setinv=setinv,getinv=getinv)
 }
 
 
-## Write a short comment describing this function
-
+## cacheSolve checks if matrix has been inversed, otherwise calculates the
+## inverse and store the result in the makeCacheMatrix function
 cacheSolve <- function(x, ...) {
     m_inv<-x$getinv()
     if(!is.null(m_inv)){
@@ -42,11 +47,10 @@ cacheSolve <- function(x, ...) {
 }
 
 
-##The following lines can be uncommented to test the
-##two functions
-testmatrix<-matrix(1:4,2,2)
-testCacheMatrix<-makeCacheMatrix(testmatrix)
-result<-cacheSolve(testCacheMatrix)
-print(result)
-result<-cacheSolve(testCacheMatrix)
-print(result)
+##The following lines can be uncommented to test the two functions
+# testmatrix<-matrix(1:4,2,2)
+# testCacheMatrix<-makeCacheMatrix(testmatrix)
+# result<-cacheSolve(testCacheMatrix)
+# print(result)
+# result<-cacheSolve(testCacheMatrix)
+# print(result)
